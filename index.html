@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OZBA Web Solutions | Ingeniería Digital</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES Y ESTILOS BASE --- */
+        :root {
+            --bg-dark: #050505;
+            --bg-secondary: #111111;
+            --neon-blue: #00f2ff;
+            --neon-purple: #bc13fe;
+            --silver-gradient: linear-gradient(to bottom, #ffffff 20%, #d4d4d4 50%, #8a8a8a 100%);
+            --text-main: #ffffff;
+            --text-muted: #b3b3b3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Open Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 900; }
+
+        /* --- MARCA OZBA (TITÁNICA) --- */
+        .brand-container {
+            text-align: center;
+            text-transform: uppercase;
+            filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.2));
+            margin-bottom: 5px;
+        }
+
+        .brand-ozba {
+            font-family: 'Montserrat', sans-serif;
+            /* Grosor refinado (700) para que sea elegante */
+            font-weight: 700; 
+            line-height: 0.9;
+            background: var(--silver-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        /* TAMAÑO MONSTRUOSO EN NAVBAR */
+        .navbar .brand-ozba {
+            font-size: 6rem; /* ¡Lo más grande de la página! */
+        }
+
+        .brand-solutions {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+            color: var(--neon-blue);
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            background: rgba(5,5,5,0.95);
+            backdrop-filter: blur(15px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            /* Sombra sutil para separar del contenido */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        /* --- EFECTOS ESPECIALES --- */
+        .tech-frame {
+            position: relative;
+            padding: 4px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.2);
+            overflow: hidden;
+        }
+        
+        .tech-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 9px;
+            /* Filtro para que las imágenes se vean más "tech" */
+            filter: contrast(1.1) saturate(1.1);
+        }
+
+        .skew-divider {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 80px;
+            background: var(--bg-secondary);
+            clip-path: polygon(0 100%, 100% 0, 100% 100%);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* IMAGEN DE FONDO (Rascacielos/Ciudad) */
+            background: linear-gradient(rgba(5,5,5,0.85), rgba(5,5,5,0.95)), 
+                        url('https://loremflickr.com/1920/1080/city,night,business/all');
+            background-size: cover;
+            background-position: center;
+            /* Padding ajustado para el logo gigante */
+            padding: 280px 20px 100px 20px; 
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            margin-bottom: 25px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        
+        .highlight { color: var(--neon-blue); text-shadow: 0 0 15px rgba(0, 242, 255, 0.4); }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            max-width: 750px;
+            margin: 0 auto 45px auto;
+            color: var(--text-muted);
+        }
+
+        .btn-neon-cta {
+            padding: 20px 50px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 60px;
+            letter-spacing: 2px;
+            box-shadow: 0 0 40px rgba(188, 19, 254, 0.4);
+            transition: all 0.3s;
+            display: inline-flex; align-items: center; gap: 15px;
+            font-size: 1.1rem;
+        }
+        .btn-neon-cta:hover { transform: scale(1.05); box-shadow: 0 0 60px rgba(0, 242, 255, 0.7); }
+
+        /* --- SECCIONES DE CONTENIDO --- */
+        .section { padding: 120px 20px; position: relative; }
+        .bg-sec { background-color: var(--bg-secondary); }
+        .container { max-width: 1250px; margin: 0 auto; }
+
+        .split-layout { display: flex; align-items: center; gap: 60px; }
+        .split-text { flex: 1; }
+        .split-image { flex: 1.1; }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: ''; position: absolute; bottom: -15px; left: 0;
+            width: 80px; height: 5px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .split-text p { font-size: 1.15rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 25px; }
+
+        .check-list li {
+            margin-bottom: 15px; display: flex; align-items: center; gap: 15px;
+            font-weight: 700; font-size: 1.1rem;
+        }
+        .check-list i { color: var(--neon-blue); font-size: 1.3rem; filter: drop-shadow(0 0 5px var(--neon-blue)); }
+
+        /* --- BENEFICIOS --- */
+        .benefits-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px; margin-top: 60px;
+        }
+
+        .benefit-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        .benefit-card:hover {
+            border-color: var(--neon-purple);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(188, 19, 254, 0.15);
+        }
+        .benefit-icon {
+            font-size: 3.5rem; margin-bottom: 25px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .benefit-card h3 { margin-bottom: 15px; font-size: 1.5rem; }
+        .benefit-card p { font-size: 1rem; line-height: 1.6; color: var(--text-muted); }
+
+        /* --- FOOTER --- */
+        footer { background: #020202; padding: 80px 20px; text-align: center; position: relative; overflow: hidden; }
+        footer .brand-ozba { font-size: 3.5rem; } /* Grande en footer también */
+        
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #25D366; color: white;
+            width: 70px; height: 70px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 38px; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
+            z-index: 100; transition: all 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.15); }
+
+        /* --- RESPONSIVE --- */
+        @media(max-width: 968px) {
+            /* Ajuste para celular para que el logo gigante no rompa la pantalla */
+            .navbar .brand-ozba { font-size: 3.2rem; } 
+            .hero { padding-top: 200px; }
+            .split-layout { flex-direction: column; gap: 40px; }
+            .split-layout.reverse { flex-direction: column-reverse; }
+            .hero-content h1 { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="brand-container">
+            <div class="brand-ozba">OZBA</div>
+            <div class="brand-solutions">WEB SOLUTIONS</div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>No Es Solo Una Página Web.<br>Es Tu <span class="highlight">Máquina de Ventas.</span></h1>
+            <p class="hero-subtitle">
+                Ingeniería digital aplicada a tu negocio. Diseño de alto impacto que convierte visitantes en clientes.
+            </p>
+            <a href="#contacto" class="btn-neon-cta">
+                <i class="fab fa-whatsapp"></i> Quiero Digitalizar Mi Negocio
+            </a>
+        </div>
+        <div class="skew-divider"></div>
+    </header>
+
+    <section class="section bg-sec">
+        <div class="container">
+            <div class="split-layout">
+                <div class="split-text">
+                    <h2 class="section-title">¿Vas Empezando? <br><span class="highlight">Hazlo Como Gigante.</span></h2>
+                    <p>
+                        Tienes la idea y las ganas, pero nadie te conoce. En el mundo digital, la primera impresión es la única que cuenta.
+                    </p>
+                    <p>
+                        No lances tu negocio con una página "casera". Nosotros creamos una presencia digital que te hace ver establecido, profesional y confiable desde el día uno.
+                    </p>
+                    <ul class="check-list">
+                        <li><i class="fas fa-check-circle"></i> Genera confianza inmediata.</li>
+                        <li><i class="fas fa-check-circle"></i> Compite visualmente con los grandes.</li>
+                    </ul>
+                </div>
+                <div class="split-image">
+                    <div class="tech-frame">
+                        <img src="https://loremflickr.com/800/600/startup,team,office/all" alt="Equipo exitoso">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="split-layout reverse">
+                <div class="split-image">
+                    <div class="tech-frame">
+                        <img src="https://loremflickr.com/800/600/business,meeting,work/all" alt="Crecimiento de negocio">
+                    </div>
+                </div>
+                <div class="split-text">
+                    <h2 class="section-title">¿Ya Tienes Negocio? <br><span class="highlight">Potencia Tu Alcance.</span></h2>
+                    <p>
+                        Ya tienes clientes, pero sientes que te estancaste. Tu competencia ya está en Google Maps y te está robando las ventas nuevas.
+                    </p>
+                    <p>
+                        Una página web profesional de <strong>OZBA</strong> rompe las barreras físicas de tu local. Vende las 24 horas y automatiza tus procesos.
+                    </p>
+                    <ul class="check-list">
+                        <li><i class="fas fa-check-circle"></i> Tu negocio abierto 24/7.</li>
+                        <li><i class="fas fa-check-circle"></i> Sube el estatus de tu marca.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-sec" id="beneficios">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 class="section-title">La Diferencia Entre <span class="highlight">Sobrevivir y Dominar</span></h2>
+                <p style="color: var(--text-muted); max-width: 700px; margin: auto; font-size: 1.2rem;">Tener redes sociales ya no es suficiente. Esto es lo que logras con una web:</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-map-marked-alt benefit-icon"></i>
+                    <h3>Visibilidad Total</h3>
+                    <p>Si buscan tu servicio en Google Maps y no tienes web, pierdes el cliente. Aparece primero que tu competencia.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-shield-alt benefit-icon"></i>
+                    <h3>Credibilidad</h3>
+                    <p>Un negocio con página web propia transmite seguridad. Deja de ser "un local más" y conviértete en una marca.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-rocket benefit-icon"></i>
+                    <h3>Ventas Automáticas</h3>
+                    <p>Tu página muestra tus productos y servicios mientras tú duermes. Recibe cotizaciones listas para cerrar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="brand-container" style="margin-bottom: 40px;">
+            <div class="brand-ozba">OZBA</div>
+            <div class="brand-solutions">WEB SOLUTIONS</div>
+        </div>
+        <h2 style="color: white; margin-bottom: 40px; font-size: 2.5rem;">Deja de imaginarlo. <br> <span class="highlight">Hagámoslo realidad.</span></h2>
+        
+        <a href="https://wa.me/525513368961?text=Hola%20OZBA,%20quiero%20cotizar%20mi%20página" class="btn-neon-cta">
+            <i class="fab fa-whatsapp"></i> Hablar con un Ingeniero
+        </a>
+
+        <p style="color: #666; margin-top: 60px; font-size: 0.9rem;">
+            © 2026 OZBA Web Solutions. CDMX.
+        </p>
+    </footer>
+
+    <a href="https://wa.me/525512345678?text=Hola%20OZBA,%20vi%20su%20sitio%20web" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // 1. Bloquear Click Derecho
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            // Opcional: Puedes poner una alerta si quieres asustarlos
+            // alert('© OZBA Web Solutions. Código Protegido por Derechos de Autor.'); 
+        });
+
+        // 2. Bloquear Teclas de Inspección (F12, Ctrl+Shift+I, Ctrl+U)
+        document.onkeydown = function(e) {
+            // F12
+            if(e.keyCode == 123) {
+                return false;
+            }
+            // Ctrl+Shift+I (Inspeccionar)
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                return false;
+            }
+            // Ctrl+Shift+C (Inspeccionar Elemento)
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                return false;
+            }
+            // Ctrl+Shift+J (Consola)
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                return false;
+            }
+            // Ctrl+U (Ver Código Fuente)
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                return false;
+            }
+        }
+    </script>
+
+</body>
+</html>
